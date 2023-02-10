@@ -16,7 +16,12 @@ export class User {
     }
 
     mostrarNome () {
-        console.log (`Name: ${this.name} - Username: ${this.username} - Ativo: ${this.ativo}`)
+        if (this.ativo === false) {
+            console.log ("O user nao esta ativo, ative ele antes");
+            return 
+        }
+
+        console.log (``)
     }
 
     ativarUser () {
