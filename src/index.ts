@@ -1,83 +1,101 @@
-import { User } from './user/user'
-import { Arroz, Bebida, Produto, TipoArroz } from './produto/produto'
-import { TipoProduto } from "./produto/produto";
-import { Aluno, Avaliacao, Etapa } from './aluno/aluno';
-
-// //Paradigma imperativo
-
-// let valor1: number = 10;
-// let valor2: number = 8;
-
-// let media: number = (valor1 + valor2) / 2
-
-// //Paradigma procedural -> A partir de agora nos vamos ter pequenos processos dentro do nosso codigo, criando varias funcoes para nao ter que reescrever
-// //todo processo
-
-// function calcMedia (x: number, y: number) {
-//     return (x + y) / 2
-// }
-
-// media = calcMedia (valor1, valor2)
-
-// console.log (media)
+import { profileEnd } from "console";
+import { Produto, Arroz, Bebida, TipoProduto, TipoArroz } from "./produto/produto";
 
 
-// let user1 = new User ("Lucas", "Mateus", 20)
-// let user2 = new User ("Bruna", "Carol", 24)
+let produtos: Produto[] = [
+    new Produto ("Cervaja", 20, TipoProduto.bebida),
+    new Arroz (6, TipoArroz.branco),
+    new Produto ("Feijao", 5, TipoProduto.alimento),
+    new Produto ("Xicara", 15, TipoProduto.bazar),
+    new Produto ("Prato", 30, TipoProduto.bazar),
+    new Bebida ("Coca", 7, 2)
+]
 
-// // user1.name = "Lucas"
-// // user2.name = "Mateus"
+//O map vai mapear cada item desse array e nos geralmente vamos passar uma funcao como parametro (arrow function)
+//O parametro item vai fazer com quem a cada item a funcao seja chamada
+//O map ele retorna um outro array, sendo o maior objetivo dele pegar um lista e alterar ela, fazendo uma copia alterada dela
+//Serve para manipular os valores do array
+let novoArray = produtos.map((item) => {
+    if (item.tipo === TipoProduto.alimento) {
+        item.valor = item.valor + 10
+        return item
+    }
+})
+
+//A operacao foreach eh igual o map, a unica difereca eh que o foreach retorna void, n vai retornar uma copia do array 
+produtos.forEach (item => {
+    item.valor = item.valor + 10
+})
 
 
-// //Se nos der um console.log no objeto ele vai nos retornar o nome da classe e os valores que tem dentro
-// // console.log (user1)
-// // console.log (user2)
+//O filter serve para nos filtrar algo que queremos
+let bebidas = produtos.filter (item => {
+    if (item.tipo === TipoProduto.bebida) {
+        return true
+    }
 
-// user1.mostrarNome()
+    return false
+})
+
+produtos.filter (item => item.tipo === TipoProduto.alimento)
+
+//Quando nos queremos pegar um elemento especifico da lista nos devemos usar o finde, para procurar apenas um elemento
+//Caso a gente use o find e haja mais de um elemento igual, ele sempre vai retornar o primeiro elemento que encontrar
+let xicara = produtos.find ((item) => {
+    if (item.nome === "Xicara"){
+        return true
+    }
+
+    return false
+})
+
+let xicara2 = produtos.filter ((item) => {
+    return item.nome.match(/^Xicara$/)
+})
+
+console.log (produtos.some ((item) => item.nome === "Xicara"))
+console.log (produtos.every ((item) => item.valor < 100))
+
+let xicaraIndex = produtos.findIndex ((item) => item.nome === "Xicara")
+
+//Existem 3 maneiras de adicionar as coisas num array
+
+//O push vai colocar o novo elemento no final da lista
+produtos.push(new Produto ("Tomate", 10, TipoProduto.alimento))
+
+//O unshift vai colocar o novo elemento no inicio da lista
+produtos.unshift (new Produto ("Cebola", 15, TipoProduto.alimento))
+
+let novoProdutos = [
+    new Produto ("Tomate", 7, TipoProduto.alimento),
+    new Produto ("Cebola", 9, TipoProduto.alimento)
+]
+
+//Concat vai concatenar os arrays
+
+produtos = produtos.concat(produtos, novoProdutos)
+
+//Remove o ultimo
+produtos.pop()
+
+//Remove o primeiro
+produtos.shift()
+
+//O splice serve para remover mais de um elemento do array, ele possuiu dois argumentos, o primeiro defini em qual posicao vai comecar e o segundo
+//quantos ele vai remover
+produtos.splice(2, 5)
+
+//O reduce 
+let valor = produtos.reduce ((current, item) => {
+
+}, 0)
+
+produtos.push()
+produtos.unshift (...novoProdutos)
+
+// console.log (novoArray)
+// console.log (produtos)
+
+console.log (bebidas)
 
 
-// user1.ativarUser()
-// user1.mostrarNome()
-
-
-//Agora que nos fizemos um construtor na classe arroz, nos temos que chamar esse construtor
-// let arroz = new Arroz (7, TipoArroz.parbolizado)
-// let coca = new Bebida ("Coca", 5, 2)
-// let copo = new Produto ("Copo", 15, TipoProduto.bazar)
-
-
-// arroz.tipoArroz = TipoArroz.parbolizado
-
-
-// console.log (arroz)
-// console.log (coca)
-// console.log (copo)
-
-// //Sempre que eu exigir um tipo produto, que eh a classe mae eu posso passar como parametro uma classe filha tbm 
-
-// function mostraTipoArroz (arroz: Arroz) {
-//     console.log (`O tipo do arroz eh ${arroz.tipoArroz}`)
-// }
-
-// function mostraTipoProduto (produto: Produto) {
-//     console.log (`O tipo do produto eh ${produto.tipo}`)
-// }
-
-// mostraTipoArroz (arroz)
-// mostraTipoProduto (copo)
-
-const lucas = new Aluno ("Lucas", Etapa.Medio)
-const avaliacao1 =  new Avaliacao (10, "Matematica")
-
-//associando os dois objetos
-
-//Agora que definimos a propriedade nota como private, nos nao podemos mais modificar ela, apenas dentro da classe
-//Nao pode nem ler e nem atribuir valor pra nota
-// avaliacao1.nota = 5
-// console.log (avaliacao1.nota)
-//Alterando a nota
-avaliacao1.alterarNota (10)
-
-lucas.avaliacao = avaliacao1
-
-console.log (lucas)

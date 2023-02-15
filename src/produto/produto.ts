@@ -16,7 +16,7 @@ export enum TipoArroz {
 
 export class Produto {
     public nome: string;
-    protected valor: number;
+    public valor: number;
     public tipo: TipoProduto  //Alimento, bebida, bazar 
     
     constructor (nome: string, valor: number, tipo: TipoProduto) {
