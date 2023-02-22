@@ -73,5 +73,12 @@ export class Bebida extends Produto{
 } 
 
 
+let arrayTeste = [
+    "Lucas",
+    18, 
+    Boolean
+]
+
+
 
 

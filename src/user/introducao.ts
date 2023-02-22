@@ -1,7 +1,7 @@
-import { User } from './user/user'
-import { Arroz, Bebida, Produto, TipoArroz } from './produto/produto'
-import { TipoProduto } from "./produto/produto";
-import { Aluno, Avaliacao, Etapa } from './aluno/aluno';
+import { User } from './user'
+import { Arroz, Bebida, Produto, TipoArroz } from '../produto/produto'
+import { TipoProduto } from "../produto/produto";
+import { Aluno, Avaliacao, Etapa } from '../aluno/aluno';
 
 // //Paradigma imperativo
 
